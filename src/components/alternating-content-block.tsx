@@ -1,3 +1,5 @@
+import Button from "./button"
+
 interface ContentBlock {
   index: number,
   heading: string,
@@ -6,15 +8,17 @@ interface ContentBlock {
   paragraphs?: string[],
   listHeading?: string,
   listItems?: string[],
+  linkUrl?: string,
+  linkText?: string,
 }
 
-const AlternatingContentBlock =({ index, heading, imageUrl, imageAlt, paragraphs, listHeading, listItems }: ContentBlock) => {
+const AlternatingContentBlock =({ index, heading, imageUrl, imageAlt, paragraphs, listHeading, listItems, linkUrl, linkText }: ContentBlock) => {
   const isEven = index % 2 == 0;
   const oddClasses = "flex flex-col-reverse place-items-center md:flex md:flex-row-reverse md:justify-center"
   const evenClasses = "grid grid-cols-1 place-items-center md:grid-cols-2"
   return (
     <div className={isEven ? evenClasses : oddClasses}>
-      <div className={`relative w-full min-h-[250px] overflow-hidden ${!isEven ? 'md:w-[50%]' : ''}`}>
+      <div className={`relative w-full min-h-[250px] overflow-hidden md:h-full ${!isEven ? 'md:w-[50%]' : ''}`}>
         <img 
           src={imageUrl}
           alt={imageAlt}
@@ -40,6 +44,13 @@ const AlternatingContentBlock =({ index, heading, imageUrl, imageAlt, paragraphs
               </li>
             ))}
           </ul>
+        )}
+        {linkUrl && linkText && (
+          <Button
+            buttonType='link' 
+            linkUrl={linkUrl}
+            buttonText={linkText}
+          />
         )}
       </div>
     </div>

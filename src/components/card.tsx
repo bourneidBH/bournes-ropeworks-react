@@ -1,11 +1,12 @@
 import { CardData } from "../types"
+import Button from "./button"
 
 const Card = (props: CardData) => {
   return (
-    <div className="bg-white shadow-lg w-full max-w-screen-sm">
-      <div className="relative mb-6">
-        <img src={props.imageUrl} alt={props.title} className="w-full absolute top-0 left-0" />
-        <h3 className="text-xl text-white drop-shadow-md">{props.title}</h3>
+    <div className="bg-white shadow-lg w-full max-w-screen-sm pb-4">
+      <div className="relative h-[200px]">
+        <img src={props.imageUrl} alt={props.title} className="w-full h-[200px] absolute object-cover object-center overflow-hidden" />
+        <h3 className="text-xl text-white drop-shadow-lg p-4 absolute bottom-0">{props.title}</h3>
       </div>
       <div className="p-4">
         {props.body.map((el, idx) => (
@@ -17,6 +18,16 @@ const Card = (props: CardData) => {
           <p>{props.priceInfo}</p>
         </div>
       )}
+      {props?.linkUrl && props?.linkText && (
+        <div className="p-4">
+          <Button
+            buttonType='link' 
+            linkUrl={props.linkUrl}
+            buttonText={props.linkText}
+          />
+        </div>
+      )}
+
     </div>
   )
 }
