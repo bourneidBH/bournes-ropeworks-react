@@ -3,6 +3,8 @@ export type CardData = {
   imageUrl: string,
   body: string[],
   priceInfo?: string,
+  linkUrl?: string,
+  linkText?: string,
 }
 
 export type BannerData = {
